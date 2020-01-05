@@ -1,0 +1,46 @@
+﻿@model Project.Models.WinningNos
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddingWinningNo", "User", FormMethod.Post, new { @onsubmit = "return checkBox(this)" }))
+{
+    
+    <div class="form-horizontal">
+        <h2> Try Out Your Luck</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.WinningNo, htmlAttributes: new { @class = "label-control" })
+            <div class="">
+                @Html.TextBoxFor(model => model.WinningNo, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <input type="hidden" name="UserId" value="@Session["Id"]" />
+        <div class="form-group">
+            <input type="submit" name="submit" value="Try Out" class="btn btn-danger" />
+            <input type="button" id="generator" name="generator" value="Generate" class="btn btn-primary" />
+            <input type="button" id="clear" value="Clear" class="btn btn-info" />
+        </div>
+    </div>
+}
+<script>
+
+    var generator = document.getElementById("generator"),
+        textBox = document.getElementById("WinningNo"),
+        clearBox = document.getElementById("clear");
+
+    function checkBox(obj) {
+        if (textBox.value == "") {
+            return false;
+        }
+        return true;
+    }
+    generator.onclick = function () {
+        var randomNumber = Math.floor(Math.random() * ((9999 - 1000) + 1) + 1000);
+        textBox.value = randomNumber;
+    };
+    clearBox.onclick = function () {
+        textBox.value = "";
+    };
+</script>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Project.Models.DetailsOfWinningNo>
+@{
+    ViewBag.Title = "getDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Winning Numbers</h2>
+
+<table class="table>">
+    <thead>
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayNameFor(model => model.WinningNo)
+                </b>
+            </td>
+            <td> <b>User Id </b></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.WinningNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.UserId)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("Back To List", "Details", "Admin")

@@ -1,0 +1,43 @@
+﻿@model Project.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("login", "Login", FormMethod.Post, new { onsubmit="return callMe()"}))
+{
+    @Html.AntiForgeryToken();
+    <div class="form-horizontal">
+        <h2 id="head">Login</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control", @type="password" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-default" />
+        </div>
+    </div>
+}
+<script>
+    function callMe() {
+        var email = document.getElementById("Email"),
+            password = document.getElementById("Password");
+        if (email.value == "") {
+            alert("Please fill out the credentials");
+            return false;
+        } else if (email.value == "" && password.value == "") {
+            alert("Please fill out the credentials");
+            return false;
+        } else if (password.value == "") {
+            alert("Please fill out the credentials");
+            return false;
+        }
+        return true;
+    }
+</script>

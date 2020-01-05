@@ -1,0 +1,74 @@
+﻿@model Project.Models.Price
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="form-horizontal">
+
+        @using (Html.BeginForm("LuckyDrawSubmit", "Admin", FormMethod.Post))
+        {
+            <h2 id="head">Lucky Draw</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PriceType, new { @class = "control-label" })
+                <br />
+                @Html.DropDownListFor(model => model.id, new List<SelectListItem>
+           {
+               new SelectListItem{Text = "third prize -1st winner", Value="1" },
+               new SelectListItem{Text = "third prize -2st winner", Value="2" },
+               new SelectListItem{Text = "third prize -3st winner", Value="3" },
+               new SelectListItem{Text = "second prize -1st winner", Value="4" },
+               new SelectListItem{Text = "second prize -2st winner", Value="5" },
+               new SelectListItem{Text = "third prize -1st winner", Value="6" }
+
+           }, "please select", htmlAttributes: new { @class = "form-control" })
+            </div>
+            @*<div class="form-group">
+                 @Html.Label("Generate Randomly", new { @class="control-label"})
+                 @Html.DropDownList("Generator", new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Yes", Value ="1" },
+                new SelectListItem{Text = "No", Value = "2" }
+
+            },"please select", htmlAttributes: new { @class="form-control"})
+             </div>
+            *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.WinningNo, htmlAttributes: new { @class = "control-label"  })
+                <input type="text" class="form-control" id="generatedCode" name="WinningNo"/>                
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class="control-label"})
+                @Html.TextBoxFor(model => model.UserId, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            
+
+            <div class="form-group">
+                <input type="submit" value="DRAW" class="btn btn-danger" />
+            </div>
+
+        }
+        @using (Ajax.BeginForm("GetAjax", "Admin", new AjaxOptions
+            {
+                OnSuccess = "OnSuccess"
+                
+        }))
+        {
+    <div class="form-group">
+        <input type="submit" value="Generate Randomly" class="btn btn-danger" />
+    </div>
+        }
+    </div>
+<script> 
+    function OnSuccess(data) {
+        var obj = JSON.stringify(data);
+        var json = JSON.parse(obj); 
+        json.forEach(function (m) {
+            document.getElementById("UserId").value = m.UserId;
+            document.getElementById("generatedCode").value = m.WinningNo;
+            
+        });      
+    }
+</script>

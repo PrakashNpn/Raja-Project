@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Project.Models.GetWinners>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Prices";
+}
+
+<h2>Winners Of The Week</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.PriceType)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.WinningNo)
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.PriceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.WinningNo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

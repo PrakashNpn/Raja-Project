@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Project.Models.GetDetails>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lucky Draw Number Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.id)
+            </td>
+            <td>
+                <b>Actions</b>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Email)                                          
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.id)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "getDetails", "User", new { id=item.UserId}, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
